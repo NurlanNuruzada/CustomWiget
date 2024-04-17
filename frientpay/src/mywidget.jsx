@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { SocialIcon } from 'react-social-icons';
 import { CgClose } from "react-icons/cg";
+import ReplymentLogo1 from "./Vector.png";
+import { MdClose } from "react-icons/md";
+
 
 const MyWidget = ({ id, name }) => {
     // State to hold button styles
@@ -56,69 +59,51 @@ const MyWidget = ({ id, name }) => {
     const buttonShadow = apiData?.shadow ? apiData?.shadow : '';
     const [openWidget, setOpenWidget] = useState(false);
     const widgetStyles = {
-        container: {
-            position: 'fixed',
-            bottom: '20px', // Adjust spacing from the bottom
-            right: '20px', // Adjust spacing from the right side
-            width: 'max-content', // Automatically adjust width'max-content'
-            backgroundColor: 'transparent', // Background color for the widget
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: "max-content",
-            overflow: "hidden",
-            // backgroundColor: 'red'
-        },
-        button: {
-            padding: '10px 20px',
-            margin: '10px 0', // Space between buttons
-            borderRadius: '5px', // Rounded corners for buttons
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '16px',
-        },
-        title: {
-            color: '#f200ff',
-            fontSize: '24px',
-            textAlign: 'center',
-        },
-        details: {
-            fontSize: '16px',
-            color: '#333',
-            margin: '10px 0',
-        }
+
     };
     console.log("----->", AllCustomizeButton?.data);
+
+    const [notSocialIcon, setNotSocialIcon] = useState(false);
+    useEffect(() => {
+        // SelectedButtons içerisinde "Skype", "Waze", "Call" veya "Google Maps" varsa notSocialIcon true yap
+        if (AllCustomizeButton?.data?.getCustomButtons.some(button => ["Skype", "Waze", "Call", "Google Maps"].includes(button.name))) {
+            setNotSocialIcon(true);
+        } else {
+            setNotSocialIcon(false); // Eğer listede bu butonlar yoksa notSocialIcon false yap
+        }
+    }, [AllCustomizeButton?.data?.getCustomButtons]);
+
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: '20px', // Adjust spacing from the bottom
-            right: '20px', // Adjust spacing from the right side
-        }}>
-            <div style={widgetStyles.container} >
-                {AllCustomizeButton?.data?.getCustomButtons.map((button, index) => {
-                    var socialNetworkAddresUrl = button?.addressUrl;
-                    var isWhatsapp = button?.isWhatsapp;
-                    return (
-                        <button key={index} style={{ boxShadow: (`${buttonShadow / 10}px ${buttonShadow / 5}px ${buttonShadow / 5}px black `), border: `1px solid ${apiData.widgetColor}`, borderRadius: buttonBorderRadius, marginTop: '8px', width: buttonWidghtSize, height: buttonHeightSize, opacity: openWidget === true ? 0 : (AllCustomizeButton?.data?.opacity / 100) }}>
-                            <div style={{ borderRadius: buttonBorderRadius, height: (`${buttonWidghtSize / 3}px`), width: AllCustomizeButton?.data?.buttonStyle === 1 ? (`${buttonWidghtSize / 3.4}px`) : '90%', display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : 'flex', justifyContent: AllCustomizeButton?.data?.buttonStyle === 1 ? 'center' : 'start', alignItems: 'center' }}>
-                                <SocialIcon style={{ marginLeft: '16px', display: AllCustomizeButton?.data?.buttonStyle === 1 ? "block" : "flex", width: (`${buttonHeightSize / 2}px`), height: (`${buttonHeightSize / 2}px`) }} url={isWhatsapp ? "https://whatsapp.com" : "https://www.youtube.com/"} />
-                                <p style={{ marginLeft: '4px', display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '', color: 'black', fontSize: button?.name.length >10 ? (`${buttonHeightSize / 3.3}px`) : (`${buttonHeightSize / 3}px`) }}>{button?.name}</p>
-                            </div>
-                        </button>
-                    )
-                })}
-                <button onClick={() => setOpenWidget((prev) => !prev)} style={{ boxShadow: (`${buttonShadow / 10}px ${buttonShadow / 5}px ${buttonShadow / 5}px black `), opacity: apiData.Opacity / 100, border: `1px solid ${apiData.widgetColor}`, marginTop: '8px', borderRadius: buttonBorderRadius, width: buttonWidghtSize, height: buttonHeightSize }}>
-                    <div color={apiData.widgetColor} style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? "block" : "none" }} ><CgClose size={(`${buttonHeightSize / 2}px`)} /></div>
-                    <div style={{ borderRadius: buttonBorderRadius, width: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '90%', display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : 'flex', justifyContent: AllCustomizeButton?.data?.buttonStyle === 1 ? 'center' : 'start' }}>
-                        <div color={apiData.widgetColor} style={{ width: (`${buttonWidghtSize / 3.4}px`), height: (`${buttonWidghtSize / 3}px`), display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                            <CgClose size={(`${buttonHeightSize / 2}px`)} />
-                        </div>
-                        <p style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '', color: 'black', fontSize: (`${buttonHeightSize / 3}px`), marginLeft: '4px' }}>Close</p>
+        <div style={{ position: 'fixed', bottom: '2%', right: '1.8%', display: 'flex', flexDirection: "column", left: AllCustomizeButton?.data?.position === false && '1.5%', right: AllCustomizeButton?.data?.position === true && '1.8%' }} className={widgetStyles.LiveYourButtons}>
+            {AllCustomizeButton?.data?.getCustomButtons && AllCustomizeButton?.data?.getCustomButtons.map((button, index) => (
+                <button key={index} style={{ backgroundColor: 'transparent', boxShadow: (`${AllCustomizeButton?.data?.shadow / 10}px ${AllCustomizeButton?.data?.shadow / 5}px ${AllCustomizeButton?.data?.shadow / 5}px black `), border: AllCustomizeButton?.data?.buttonStyle !== 1 && `1px solid ${AllCustomizeButton?.data?.widgetColor}`, borderRadius: AllCustomizeButton?.data?.borderRadius / 2.35, width: buttonWidghtSize, height: buttonHeightSize, opacity: openWidget ? 0 : AllCustomizeButton?.data?.opacity / 100 }} className={widgetStyles.yourButton}>
+                    {notSocialIcon === true &&
+                        <img style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? "block" : "none" }} src={'https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s='} />
+                    }
+                    {notSocialIcon === false &&
+                        <SocialIcon style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? "block" : "none", width: '100%', height: '100%' }} url={button.addressUrl} />
+                    }
+                    <div className={widgetStyles.yourButtonInDiv} style={{ borderRadius: AllCustomizeButton?.data?.borderRadius, width: AllCustomizeButton?.data?.buttonStyle === 1 ? '100%' : '90%', display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : 'flex', justifyContent: AllCustomizeButton?.data?.buttonStyle === 1 ? 'center' : 'start', }}>
+                        {notSocialIcon === true &&
+                            <img src={'https://media.istockphoto.com/id/1322220448/photo/abstract-digital-futuristic-eye.jpg?s=612x612&w=0&k=20&c=oAMmGJxyTTNW0XcttULhkp5IxfW9ZTaoVdVwI2KwK5s='} />
+                        }
+                        {notSocialIcon === false &&
+                            <SocialIcon style={{ width: (`${buttonWidghtSize / 3.4}px`), height: (`${buttonWidghtSize / 3.4}px`) }} url={button.url} />
+                        }
+                        <p className={widgetStyles.yourButtonInDivInP} style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '', color: 'black', fontSize: button.name.length > 10 ? (`${buttonHeightSize / 3.8}px`) : (`${buttonHeightSize / 3}px`) }}>{button.name}</p>
                     </div>
                 </button>
-            </div>
+            ))}
+            <button onClick={() => setOpenWidget((open) => !open)} style={{ boxShadow: (`${AllCustomizeButton?.data?.shadow / 10}px ${AllCustomizeButton?.data?.shadow / 5}px ${AllCustomizeButton?.data?.shadow / 5}px black `), opacity: AllCustomizeButton?.data?.opacity / 100, border: AllCustomizeButton?.data?.buttonStyle !== 1 && `1px solid ${AllCustomizeButton?.data?.widgetColor}`, borderRadius: AllCustomizeButton?.data?.borderRadius / 2.35, width: buttonWidghtSize, height: buttonHeightSize }} className={widgetStyles.yourButton}>
+                <img style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? "block" : "none", width: '93%', height: '93%' }} src={ReplymentLogo1} />
+                <div className={widgetStyles.yourButtonInDiv} style={{ borderRadius: AllCustomizeButton?.data?.borderRadius, width: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '90%', display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : 'flex', justifyContent: AllCustomizeButton?.data?.buttonStyle === 1 ? 'center' : 'start' }}>
+                    <MdClose color={AllCustomizeButton?.data?.widgetColor} style={{ width: (`${buttonWidghtSize / 3.4}px`), height: (`${buttonWidghtSize / 3.}px`) }} />
+                    <p className={widgetStyles.yourButtonInDivInP} style={{ display: AllCustomizeButton?.data?.buttonStyle === 1 ? 'none' : '', color: 'black', fontSize: (`${buttonHeightSize / 3}px`) }}>Close</p>
+                </div>
+            </button>
         </div>
+
+        // <div></div>
     );
 };
 

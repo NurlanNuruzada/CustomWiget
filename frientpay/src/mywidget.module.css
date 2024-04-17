@@ -1,9 +1,33 @@
-.Hello {
-    color: blue;
-    font-size: 20px;
+.LiveYourButtons {
+    max-width: 240px;
+    height: auto;
+    position: fixed;
+    bottom: 2%;
+    right: 1.8%;
 }
 
-.Details {
-    font-size: 16px;
-    color: green;
+
+.yourButton {
+    width: 100%;
+    margin-top: 25px;
+    font-size: 24px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+    box-shadow: 20px red;
+    align-items: center;
+}
+
+.yourButton>div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+
+.yourButton>div>p {
+    max-width: 70%;
+    padding-left: 12px;
 }
