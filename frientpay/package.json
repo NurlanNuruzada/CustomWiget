@@ -1,76 +1,15 @@
 {
-  "name": "friendpay",
+  "name": "webpack",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.8.0",
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-brands-svg-icons": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@googlemaps/react-wrapper": "^1.1.35",
-    "@react-google-maps/api": "^2.19.2",
-    "@reduxjs/toolkit": "^1.9.5",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.19",
-    "axios": "^1.4.0",
-    "babel-plugin-macros": "^3.1.0",
-    "formik": "^2.4.3",
-    "jwt-decode": "^3.1.2",
-    "postcss": "^8.4.38",
-    "react": "^18.2.0",
-    "react-countup": "^6.4.2",
-    "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
-    "react-rating": "^2.0.5",
-    "react-rating-stars-component": "^2.2.0",
-    "react-redux": "^8.1.2",
-    "react-responsive-carousel": "^3.2.23",
-    "react-router": "^6.15.0",
-    "react-router-dom": "^6.15.0",
-    "react-scripts": "5.0.1",
-    "react-slick": "^0.29.0",
-    "react-social-icons": "^6.16.0",
-    "routes": "^2.1.0",
-    "sass": "^1.69.5",
-    "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4",
-    "yup": "^1.2.0"
-  },
+  "dependencies": {},
   "scripts": {
-    "eject": "react-scripts eject",
-    "build": "craco build",
-    "test": "craco test",
     "start": "webpack serve --config ./src/webpack.config.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "@babel/preset-react": "^7.24.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.1",
     "mini-css-extract-plugin": "^2.8.1",
-    "parcel-bundler": "^1.12.5",
     "postcss-loader": "^8.1.1",
     "style-loader": "^4.0.0",
     "webpack-bundle-analyzer": "^4.10.1",
